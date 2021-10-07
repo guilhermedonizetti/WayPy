@@ -2,7 +2,7 @@ from setuptools import setup, version
 
 setup(
     name = 'WayPy',
-    version = '0.1.0',
+    version = '0.1.4',
     author = 'Guilherme Donizetti and Luiz Fernando Rodrigues',
     author_email = 'guilhermetecnologias@gmail.com',
     packages = ['waypy'],
