@@ -30,6 +30,7 @@ class Agente(busca):
         uma rota partindo dessa cidade ate a mais proxima dentre as da lista 'arrival_points'."""
 
         tam_caminho = 100000
+        cidade_final = str(cidade_final)
 
         #se escolher Amplitude
         if metodo == self.methods[0]:
@@ -87,6 +88,7 @@ class Agente(busca):
         de gerar uma rota partindo das cidades da lista 'starting_points' usando menos Memoria."""
         
         tam_caminho = 100000
+        cidade_final = str(cidade_final)
 
         #se escolher Amplitude
         if metodo == self.methods[0]:
