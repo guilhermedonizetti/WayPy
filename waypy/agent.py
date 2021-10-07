@@ -1,6 +1,6 @@
 """This module is responsible for calling each method as needed."""
 
-from methods import busca
+from waypy.methods import busca
 
 class Agente(busca):
 

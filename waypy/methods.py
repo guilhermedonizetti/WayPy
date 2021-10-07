@@ -1,4 +1,4 @@
-from list import lista
+from waypy.list import lista
 
 class busca(object):
 
