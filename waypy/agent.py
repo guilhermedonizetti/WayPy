@@ -8,13 +8,16 @@ class Agente(busca):
     arrival_points = []
     nodes = []
     graphs = []
+    weighted_graph = []
+    heuristic = []
 
     #Initialize lists that are from default values
     def __init__(self):
                 
         #Declare the name of the methods to be chosen to compare with the input
         self.methods = ["AMPLITUDE", "PROFUNDIDADE", "PROFUNDIDADE LIMITADA",
-                   "APROFUNDAMENTO ITERATIVO", "BIDIRECIONAL"]
+                   "APROFUNDAMENTO ITERATIVO", "BIDIRECIONAL", "A_ESTRELA",
+                   "GREEDY", "CUSTO_UNIFORME"]
 
         #Declare the name of the methods to be called to execute
         self.methods_main = ["amplitude", "profundidade", "profundidade_limitada",
@@ -135,6 +138,40 @@ class Agente(busca):
         if metodo == self.methods[4]:
             for i in self.starting_points: #for each city on the list try a path...
                 caminho = self.bidirecional(i, cidade_final.upper(), self.nodes, self.graphs)
+                #the shortest path will be the current
+                if len(caminho) < tam_caminho:
+                    tam_caminho = len(caminho)
+                    self.route_starting = caminho
+            return self.route_starting
+    
+    def valued_graph(self, cidade_final, metodo, limite=False):
+        """Finds way considering values.."""
+        
+        tam_caminho = 100000
+        cidade_final = str(cidade_final)
+
+        #if Amplitude is chosen...
+        if metodo == self.methods[5]:
+            for i in self.starting_points: #for each city on the list try a path...
+                caminho = self.a_estrela(i, cidade_final.upper(), self.heuristic, self.nodes, self.weighted_graph)
+                #the shortest path will be the current
+                if len(caminho) < tam_caminho:
+                    tam_caminho = len(caminho)
+                    self.route_starting = caminho
+            return self.route_starting
+        
+        if metodo == self.methods[6]:
+            for i in self.starting_points: #for each city on the list try a path...
+                caminho = self.greedy(i, cidade_final.upper(), self.heuristic, self.nodes, self.weighted_graph)
+                #the shortest path will be the current
+                if len(caminho) < tam_caminho:
+                    tam_caminho = len(caminho)
+                    self.route_starting = caminho
+            return self.route_starting
+        
+        if metodo == self.methods[6]:
+            for i in self.starting_points: #for each city on the list try a path...
+                caminho = self.custo_uniforme(i, cidade_final.upper(), self.nodes, self.weighted_graph)
                 #the shortest path will be the current
                 if len(caminho) < tam_caminho:
                     tam_caminho = len(caminho)
