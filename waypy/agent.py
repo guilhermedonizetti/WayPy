@@ -1,8 +1,9 @@
 """This module is responsible for calling each method as needed."""
 
 from waypy.methods import busca
+from waypy.graph_values import GraphValued
 
-class Agente(busca):
+class Agente(busca, GraphValued):
 
     starting_points = []
     arrival_points = []
@@ -147,34 +148,43 @@ class Agente(busca):
     def valued_graph(self, cidade_final, metodo, limite=False):
         """Finds way considering values.."""
         
-        tam_caminho = 100000
+        menor_custo = 100000
         cidade_final = str(cidade_final)
 
         #if Amplitude is chosen...
         if metodo == self.methods[5]:
             for i in self.starting_points: #for each city on the list try a path...
-                caminho = self.a_estrela(i, cidade_final.upper(), self.heuristic, self.nodes, self.weighted_graph)
+                try:
+                    caminho, custo = self.a_estrela(i, cidade_final.upper(), self.heuristic, self.nodes, self.weighted_graph)
+                except:
+                    return False
                 #the shortest path will be the current
-                if len(caminho) < tam_caminho:
-                    tam_caminho = len(caminho)
+                if custo < menor_custo:
+                    menor_custo = custo
                     self.route_starting = caminho
             return self.route_starting
         
         if metodo == self.methods[6]:
             for i in self.starting_points: #for each city on the list try a path...
-                caminho = self.greedy(i, cidade_final.upper(), self.heuristic, self.nodes, self.weighted_graph)
+                try:
+                    caminho, custo = self.greedy(i, cidade_final.upper(), self.heuristic, self.nodes, self.weighted_graph)
+                except:
+                    return False
                 #the shortest path will be the current
-                if len(caminho) < tam_caminho:
-                    tam_caminho = len(caminho)
+                if custo < menor_custo:
+                    menor_custo = custo
                     self.route_starting = caminho
             return self.route_starting
         
         if metodo == self.methods[6]:
             for i in self.starting_points: #for each city on the list try a path...
-                caminho = self.custo_uniforme(i, cidade_final.upper(), self.nodes, self.weighted_graph)
+                try:
+                    caminho, custo = self.custo_uniforme(i, cidade_final.upper(), self.nodes, self.weighted_graph)
+                except:
+                    return False
                 #the shortest path will be the current
-                if len(caminho) < tam_caminho:
-                    tam_caminho = len(caminho)
+                if custo < menor_custo:
+                    menor_custo = custo
                     self.route_starting = caminho
             return self.route_starting
     
