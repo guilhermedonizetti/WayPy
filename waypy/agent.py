@@ -25,7 +25,7 @@ class Agente(busca, GraphValued):
                         "aprofundamento_iterativo", "bidirecional"]
         
         #Starts the list that will receive the routes
-        self.route_starting =  self.route_arrival = []
+        self.route_starting = []
 
 
     def encontrar_atendimento(self, cidade_final, metodo, limite=False):
@@ -145,15 +145,20 @@ class Agente(busca, GraphValued):
                     self.route_starting = caminho
             return self.route_starting
     
-    def valued_graph(self, cidade_final, metodo, limite=False):
+    def valued_graph(self, cidade_final, metodo, level):
         """Finds way considering values.."""
         
         menor_custo = 100000
         cidade_final = str(cidade_final)
 
+        if level == 1:
+            points = self.starting_points
+        else:
+            points = self.arrival_points
+
         #if Amplitude is chosen...
         if metodo == self.methods[5]:
-            for i in self.starting_points: #for each city on the list try a path...
+            for i in points: #for each city on the list try a path...
                 try:
                     caminho, custo = self.a_estrela(i, cidade_final.upper(), self.heuristic, self.nodes, self.weighted_graph)
                 except:
@@ -165,7 +170,7 @@ class Agente(busca, GraphValued):
             return self.route_starting
         
         if metodo == self.methods[6]:
-            for i in self.starting_points: #for each city on the list try a path...
+            for i in points: #for each city on the list try a path...
                 try:
                     caminho, custo = self.greedy(i, cidade_final.upper(), self.heuristic, self.nodes, self.weighted_graph)
                 except:
@@ -177,7 +182,7 @@ class Agente(busca, GraphValued):
             return self.route_starting
         
         if metodo == self.methods[6]:
-            for i in self.starting_points: #for each city on the list try a path...
+            for i in points: #for each city on the list try a path...
                 try:
                     caminho, custo = self.custo_uniforme(i, cidade_final.upper(), self.nodes, self.weighted_graph)
                 except:
