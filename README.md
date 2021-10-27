@@ -10,6 +10,26 @@ Python package to find a path between two distinct points in a graph.<br>
 <img src="https://www.researchgate.net/profile/Helenice-Florentino/publication/276508266/figure/fig3/AS:391774762749955@1470417790101/Figura-3-Ilustracao-de-um-grafo-GV-A-que-o-algoritmo-de-Dijkstra-modificado-pode-ser.png" width="350" height="250">
 </p>
 
+<b>Instructions for use: </b><br>
+Initially, it is necessary to install the package. No dependencies are required:
+```python
+pip install WayPy
+```
+After installation, you must perform the import inside the Python file:
+```python
+from waypy.agent import Agente
+```
+To assign the values of the graph and perform the searches, it is necessary to instantiate the Agente class and inform the values.
+```python
+agent = Agente()
+
+agent.starting_points = start
+agent.arrival_points = arriv
+agent.nodes = nodes
+agent.graphs = edges
+```
+Start, arrive, nodes and edge are considered to be variables that contain the values. See more enlightening examples in the <a href="https://github.com/guilhermedonizetti/WayPy/tree/examples">examples branch</a>.
+
 <br>
 
 <p align="center"><b>Devs: </b></p>
