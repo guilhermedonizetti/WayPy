@@ -2,6 +2,7 @@
 <p align="center">
 Python package to find a path between two distinct points in a graph.<br>
 <i>Project Status: <b>Under development</b> :computer:</i><br>
+  <a href="https://pypi.org/project/WayPy/"><img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=darkgreen" /></a>
 </p>
 
 <b>Usage:</b> To find a path between two different points in a graph, you must inform in list format which are the nodes and edges, after that you can choose a search method and inform the points where you want to find a path, then the package generates that result. Whereas, each search method can yield different results.
